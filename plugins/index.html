@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>rdmBuild Plugin Dashboard</title>
+	<!-- Include Bootstrap CSS -->
+	<link rel="stylesheet" href="/asset/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<script src="/asset/jquery.min.js"></script>
+</head>
+<body>
+	<div class="container mt-3">
+		<h1 class="text-center">rdmBuild Plugin Dashboard</h1>
+		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+			<!-- Dashboard -->
+			<div id="dashboard" class="col" style="display: none;">
+				<div class="card h-100">
+					<div class="card-body">
+						<h5 class="card-title"><i class="bi bi-speedometer2 me-2"></i>rdmDashboard</h5>
+						<p class="card-text mb-0">MV Dashboard</p>
+						<a href="/plugins/dashboard/" class="stretched-link"></a>
+					</div>
+				</div>
+			</div>
+			<!-- Settings -->
+			<div id="settings" class="col" style="display: none;">
+				<div class="card h-100">
+					<div class="card-body">
+						<h5 class="card-title"><i class="bi bi-gear me-2"></i>Settings</h5>
+						<p class="card-text mb-0">Update the config files</p>
+						<a href="/plugins/settings/" class="stretched-link"></a>
+					</div>
+				</div>
+			</div>
+			<!-- Print Pool -->
+			<div id="print" class="col" style="display: none;">
+				<div class="card h-100">
+					<div class="card-body">
+						<h5 class="card-title"><i class="bi bi-printer me-2"></i>rdmPrint</h5>
+						<p class="card-text mb-0">MV Print Spool Manager</p>
+						<a href="/plugins/print/" class="stretched-link"></a>
+					</div>
+				</div>
+			</div>
+			<!-- Swagger -->
+			<div id="api-docs" class="col" style="display: none;">
+				<div class="card h-100">
+					<div class="card-body">
+						<h5 class="card-title"><i class="bi bi-braces me-2"></i>RDM API Documentation</h5>
+						<p class="card-text mb-0">Swagger</p>
+						<a href="/plugins/api-docs/" class="stretched-link"></a>
+					</div>
+				</div>
+			</div>
+			<!-- Status Monitor -->
+			<div id="status" class="col" style="display: none;">
+				<div class="card h-100">
+					<div class="card-body">
+						<h5 class="card-title"><i class="bi bi-graph-up me-2"></i>Status Monitor</h5>
+						<p class="card-text mb-0">Connection Monitor</p>
+						<a href="/status" class="stretched-link"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	let eventSource = new EventSource('/plugins/events/');
+	eventSource.onmessage = (event) => {
+		eventSource.close();
+		const data = JSON.parse(event.data);
+		// console.log(data);
+
+		$.each(data, (key, value) => {
+			if(value) {
+				$('#' + value).show();
+			}
+		});
+	}
+</script>
+</html>

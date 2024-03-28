@@ -1,5 +1,20 @@
 {
-	"server" : {
-		"serverPort" : "9191"
+	"server": {
+		"host": "127.0.0.1",
+		"port": 9191,
+		"timeout": 10000
+	},
+	"defaults": {
+		"service": "d3"
+	},
+	"queue": {
+		"enable": true,
+		"activeLimit": 2,
+		"queuedLimit": 5
+	},
+	"logging": {
+		"enable": true,
+		"console": true,
+		"path": "./rdm.log"
 	}
 }
