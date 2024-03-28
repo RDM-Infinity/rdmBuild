@@ -27,13 +27,13 @@ Create the service to control the MV database specifics for your enviroment. Not
 rdm.json:
 
 	{
-	"setup" : {
-		"dbType" : "d3",
-                "dbBinary" : "/usr/bin/d3",
-                "dbUser" : "RDMWEB",
-		"dbAccount" : "RDM",
-                "dbPassword" : "INFINITY",
-                "dbVM" : "pick0"
+		"setup": {
+			"dbType": "d3",
+			"dbBinary": "/usr/bin/d3",
+			"dbUser": "RDMWEB",
+			"dbAccount": "RDM",
+			"dbPassword": "INFINITY",
+			"dbVM": "pick0"
 		}
 	}
 
