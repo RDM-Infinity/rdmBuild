@@ -8,7 +8,7 @@
 		"service": "d3"
 	},
 	"queue": {
-		"enable": true,
+		"enable": false,
 		"activeLimit": 2,
 		"queuedLimit": 5
 	},
