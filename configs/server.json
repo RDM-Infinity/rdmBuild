@@ -16,13 +16,5 @@
 		"enable": true,
 		"console": true,
 		"path": "./rdm.log"
-	},
-	"auth": {
-		"enable": false,
-		"users": {
-			"admin": "pass"
-		},
-		"challenge": true,
-		"realm": false
 	}
 }

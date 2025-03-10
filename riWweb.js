@@ -150,26 +150,8 @@ app.get('/', (req, res, next) => {
 	res.sendFile(path.join(__dirname, 'plugins', 'index.html'));
 })
 
-// Check for Basic Authentication
-if('auth' in serverConfig && serverConfig.auth.enable && serverConfig.auth.users) {
-	app.use(require('express-basic-auth')({
-		users: serverConfig.auth.users,
-		challenge: serverConfig.auth.challenge,
-		realm: serverConfig.auth.realm
-	}));
-}
-
 // Route handler for the MV Database
 app.use("/:service/:programName/:format?/:debug?", (req, res, next) => {
-
-	// Check program name for special cases
-	if(req.params.programName == "getAttr") {
-		req.params.programName = "RDM.GET.ATTR";
-	}
-
-	// Convert the program name to uppercase
-	req.params.programName = req.params.programName.toUpperCase();
-
 	// Extract the parameters from the request
 	const { service, programName, format, debug } = req.params;
 
@@ -178,6 +160,13 @@ app.use("/:service/:programName/:format?/:debug?", (req, res, next) => {
 		next();
 		return;
 	}
+
+	if(req.params.programName == "getAttr") { //Ben - ??
+		req.params.programName = "RDM.GET.ATTR";
+	}
+
+	// Convert the program name to uppercase
+	req.params.programName = req.params.programName.toUpperCase();
 
 	// Set the serviceConfig to the res.locals object
 	try {
