@@ -24,5 +24,10 @@
 		},
 		"challenge": true,
 		"realm": false
+	},
+	"ssl": {
+		"enable": true,
+		"cert": "server.crt",
+		"key": "server.key"
 	}
 }

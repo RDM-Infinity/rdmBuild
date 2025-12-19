@@ -77,7 +77,7 @@ app.use("/static", express.static("asset"));
 // Middleware to process all requests
 app.use(function(req, res, next) {
 	// Set X-Powered-By header
-	res.setHeader("X-Powered-By", "RDM Infinity rdmBuild - v2.2");
+	res.setHeader("X-Powered-By", "RDM Infinity rdmBuild - v2.3");
 
 	// Set the serverConfig to the res.locals object
 	res.locals.serverConfig = serverConfig;
@@ -106,11 +106,23 @@ app.use(function(req, res, next) {
 });
 
 // Start the server
-app.listen(serverConfig.server.port, () => {
-	console.log(`RDM Infinity rdmBuild v2.2 is running on port ${serverConfig.server.port}.`);
-	if(!logger.enabled && !logger.console) console.log("Server started in silent mode. Logging is disabled.");
-	if(process.env.watch == 'true') logger.info("Server started in watch mode. Logging to file is disabled.");
-});
+if (serverConfig.ssl.enable) {
+	const certificate = fs.readFileSync(path.join(__dirname, 'certs', serverConfig.ssl.cert), 'utf8');
+	const privateKey = fs.readFileSync(path.join(__dirname, 'certs', serverConfig.ssl.key), 'utf8');
+	const credentials = { key: privateKey, cert: certificate };
+	require('https').createServer(credentials, app).listen(serverConfig.server.port, () => {
+		console.log(`RDM Infinity rdmBuild v2.3 is running on port ${serverConfig.server.port}.`);
+		console.log(`SSL is enabled. Using cert: ${serverConfig.ssl.cert} and key: ${serverConfig.ssl.key}`);
+		if(!logger.enabled && !logger.console) console.log("Server started in silent mode. Logging is disabled.");
+		if(process.env.watch == 'true') logger.info("Server started in watch mode. Logging to file is disabled.");
+	});
+} else {
+	app.listen(serverConfig.server.port, () => {
+		console.log(`RDM Infinity rdmBuild v2.3 is running on port ${serverConfig.server.port}.`);
+		if(!logger.enabled && !logger.console) console.log("Server started in silent mode. Logging is disabled.");
+		if(process.env.watch == 'true') logger.info("Server started in watch mode. Logging to file is disabled.");
+	});
+}
 
 // Route handler for the /plugins endpoint
 const pluginsDir = path.join(__dirname, 'plugins');

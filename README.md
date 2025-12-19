@@ -1,6 +1,6 @@
 # README
 
-rdmBuild v2.0 service connector allows for calls into a Multivalue database to return formatted data to the calling end point. This version supports D3, jBase, Universe, QM, and ScarletDME. This is not a complete implentation of the RESTful API Spec. Requests are allowed via both POST and GET to the end point.
+rdmBuild v2.3 service connector allows for calls into a Multivalue database to return formatted data to the calling end point. This version supports D3, jBase, Universe, QM, and ScarletDME. This is not a complete implentation of the RESTful API Spec. Requests are allowed via both POST and GET to the end point.
 
 The current build supports Linux, AIX, and Windows
 
@@ -140,3 +140,26 @@ To use basic authentication, add the following to your server.json file in the c
 | users | Object containing username and password pairs. |
 | challenge | Enable or disable challenge response. This will cause most browsers to show a popup to enter credentials on unauthorized responses. |
 | realm | Set the realm for the challenge response. |
+
+## SSL Support
+To enable SSL support, you will need to update the server.json file in the configs directory to include the ssl section as shown below:
+
+	"ssl": {
+		"enable": true,
+		"cert": "server.crt",
+		"key": "server.key"
+	}
+
+| Key | Description |
+| --- | --- |
+| enable | Enable or disable SSL support. |
+| cert | Path to the SSL certificate file. |
+| key | Path to the SSL private key file. |
+
+### Generating Self-Signed SSL Certificates for Testing
+You can generate self-signed SSL certificates using OpenSSL for testing purposes. Use the following command:
+
+```bash
+openssl req -x509 -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -keyout server.key -out server.crt
+```
+Copy both the `server.crt` and `server.key` files to the `certs` directory in your project root and enable SSL in the server.json file as described above.
