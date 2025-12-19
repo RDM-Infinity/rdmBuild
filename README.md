@@ -45,11 +45,11 @@ Example (depending on our implementation): CREATE-FILE RDM.LIBS 3 11
 
 Copy the install script inside of the mvCode into your favorite terminal emulator. This will create the following subroutines:
  - RDM.GET.DATA
-  - A routine to convert any HTTP encoded in your varstring into useable MV arrays
+   - A routine to convert any HTTP encoded in your varstring into useable MV arrays
  - RDM.SEND.DATA
-  - A routine to send back data with the proper `~~START~~` and `~~END~~` tags through rdmBuild
+   - A routine to send back data with the proper `~~START~~` and `~~END~~` tags through rdmBuild
  - FORMAT.ERROR
-  - A routine that accepts a MV array of error messages that will format them in JSON or XML based on the options passed
+   - A routine that accepts a MV array of error messages that will format them in JSON or XML based on the options passed
   
 - **Compile and catalog the above routines**
  
@@ -100,13 +100,13 @@ Using a tool such as Postman (https://www.getpostman.com/) or a web browser hit 
 
 GET version:
 
-http://YOUR_MULTIVALUE_SERVER:9191/service_name/XML.TEST.CONNCTION/?var=MV%20is%20cool
+	GET http://YOUR_MULTIVALUE_SERVER:9191/service_name/XML.TEST.CONNCTION/?var=MV%20is%20cool
 
 POST version:
 
-POST http://YOUR_MULTIVALUE_SERVER:9191/service_name/XML.TEST.CONNECTION
+	POST http://YOUR_MULTIVALUE_SERVER:9191/service_name/XML.TEST.CONNECTION
 
-var=MV%20is%20cool
+	var=MV%20is%20cool
 
 ## Response from the XML.TEST.CONNECTION Call (XML or JSON)
 
