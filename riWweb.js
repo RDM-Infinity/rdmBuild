@@ -152,6 +152,15 @@ app.get('/', (req, res, next) => {
 
 // Route handler for the MV Database
 app.use("/:service/:programName/:format?/:debug?", (req, res, next) => {
+
+	// Check program name for special cases
+	if(req.params.programName == "getAttr") {
+		req.params.programName = "RDM.GET.ATTR";
+	}
+
+	// Convert the program name to uppercase
+	req.params.programName = req.params.programName.toUpperCase();
+
 	// Extract the parameters from the request
 	const { service, programName, format, debug } = req.params;
 
@@ -160,13 +169,6 @@ app.use("/:service/:programName/:format?/:debug?", (req, res, next) => {
 		next();
 		return;
 	}
-
-	if(req.params.programName == "getAttr") { //Ben - ??
-		req.params.programName = "RDM.GET.ATTR";
-	}
-
-	// Convert the program name to uppercase
-	req.params.programName = req.params.programName.toUpperCase();
 
 	// Set the serviceConfig to the res.locals object
 	try {
