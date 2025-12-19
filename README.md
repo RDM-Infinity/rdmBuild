@@ -115,3 +115,28 @@ var=MV%20is%20cool
 or (depending on what you send)
 
 	{"success":"MV is cool"}
+
+## Basic Authentication
+
+Make sure the express-basic-auth package is installed. This will allow for basic authentication to be used with the service.
+
+	npm install express-basic-auth
+
+To use basic authentication, add the following to your server.json file in the configs directory:
+
+	"auth": {
+		"enable": true,
+		"users": {
+			"admin": "pass",
+			"user": "test"
+		},
+		"challenge": true,
+		"realm": false
+	}
+
+| Key | Description |
+| --- | --- |
+| enable | Enable or disable basic authentication. |
+| users | Object containing username and password pairs. |
+| challenge | Enable or disable challenge response. This will cause most browsers to show a popup to enter credentials on unauthorized responses. |
+| realm | Set the realm for the challenge response. |
